@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Header />
+    <ItemsAdd v-on:add-item="addItem"/>/>
+    <ItemDatas v-on:items="items" v-on:del-item="deleteItem"/>
+    <Items />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ItemsAdd from './components/ItemsAdd.vue';
+import Header from './components/layout/Header.vue';
+import Items from './components/Items.vue';
+import ItemDatas from './components/ItemDatas.vue';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  components:{
+    ItemDatas,
+    ItemsAdd,
+    Header,
+    Items
+  },
+  data(){
+    return{
+      itemdatas:[
+        {
+          id:1,
+          title:"Adidas"
+        },
+        {
+          id:2,
+          title:"Nike"
+        },
+        {
+          id:3,
+          title:"Fila"
+        },
+        {
+          id:4,
+          title:"Vans"
+        }
+      ]
+    }
+  },
+  methods:{
+    deleteItem(id){
+      this.items= this.items.filter(item => item.id != id)
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
