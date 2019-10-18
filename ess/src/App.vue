@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div id="app">
     <Header />
-    <ItemsAdd v-on:add-item="addItem"/>/>
-    <ItemDatas v-on:items="items" v-on:del-item="deleteItem"/>
+    <ItemsAdd v-on:add-item="addItem"/>
+    <ItemDatas v-bind:itemdatas="itemdatas" v-on:del-item="deleteItem"/>
     <Items />
   </div>
 </template>
@@ -45,7 +45,10 @@ export default {
   },
   methods:{
     deleteItem(id){
-      this.items= this.items.filter(item => item.id != id)
+      this.itemdatas= this.itemdatas.filter(item => item.id != id)
+    },
+    addItem(newItem){
+      this.itemdatas = [...this.itemdatas, newItem];
     }
   }
 }

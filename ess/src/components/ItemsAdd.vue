@@ -1,6 +1,6 @@
 <template>
   <div class="items-look">
-    <form @submit="addTodo">
+    <form @submit="addItem">
          <input type="text" v-model="title" name="title" placeholder="Add items..">
          <input type="submit" value="Submit" class="btn">
      </form>
@@ -8,12 +8,19 @@
 </template>
 
 <script>
+import uuid from 'uuid';
 export default {
   name: 'ItemsAdd',
+  data(){
+    return{
+      title:''
+    }
+  },
   methods:{
         addItem(e){
             e.preventDefault();
-            const newItem= {             
+            const newItem= {
+                id:  uuid.v4(),            
                 title: this.title
             }
             this.$emit('add-item',newItem);
